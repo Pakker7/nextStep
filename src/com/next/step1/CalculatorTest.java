@@ -6,6 +6,10 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+
+// 이거 테스트 기준이 메서드 하나씩하는 것이 아니고
+// plus(값) 일케 다 넣어야 함
+
 public class CalculatorTest {
 
     private Calculator col;

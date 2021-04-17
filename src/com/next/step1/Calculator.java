@@ -27,16 +27,14 @@ public class Calculator {
     private int result;
 
     public void numbersSum() {
-        int[] intArray = seperateNumber(input());
-        plus(intArray);
+        plus(seperateNumber(input()));
     }
 
     protected String input() {
         System.out.println("전달하는 문자의 합을 구하는 계산기 입니다. 입력해주세요.");
-        Scanner sc = new Scanner(System.in);
-        String str = sc.next();
 
-        return validation(str);
+        Scanner sc = new Scanner(System.in);
+        return validation(sc.next());
     }
 
     protected String validation(String str) {
@@ -52,7 +50,7 @@ public class Calculator {
     }
 
     protected int[] seperateNumber(String str) {
-        String regex = "//(.*?)\\n";
+        String regex = "//(.*?)\\n"; // //(.)\n(.*) 이렇게도 가능
         Matcher matcher = Pattern.compile(regex).matcher(str);
 
         String seperate = ",|;|\n";
