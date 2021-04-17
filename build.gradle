@@ -22,4 +22,9 @@ dependencies {
     annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.12'
     testCompileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.12'
     testAnnotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.12'
+
+    // 실습용으로 추가
+    implementation group: 'com.google.guava', name: 'guava', version: '18.0'
+    compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.1.2'
+
 }
