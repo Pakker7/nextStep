@@ -1,9 +1,9 @@
 package com.next.step1;
-import org.junit.Test;
+
+import lombok.Getter;
 
 import java.util.Arrays;
 import java.util.Scanner;
-import static org.junit.Assert.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -23,62 +23,53 @@ public class Calculator {
     5. 결과 출력
      */
 
-    public Calculator() {
-        Scanner sc = new Scanner(System.in);
+    @Getter
+    private int result;
+
+    public void numbersSum() {
+        int[] intArray = seperateNumber(input());
+        plus(intArray);
+    }
+
+    protected String input() {
         System.out.println("전달하는 문자의 합을 구하는 계산기 입니다. 입력해주세요.");
+        Scanner sc = new Scanner(System.in);
         String str = sc.next();
 
-        validation(str);
-        int[] intArray = seperateNumber(str);
-        int result = plus(intArray);
-
-        System.out.println("result -> " + result);
+        return validation(str);
     }
 
-    private void validation(String str) {
-        if(str.contains("-")) {
-            new RuntimeException();
+    protected String validation(String str) {
+        if (str.contains("-")) {
+            throw new RuntimeException("음수가 포함되어 있습니다.");
         }
+
+        if (str.equals("null") || str.isEmpty()) {
+            return "0";
+        }
+
+        return str;
     }
 
-    private int[] seperateNumber(String str) {
-        String regex = "[//](.*?)[\\n]";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(str);
+    protected int[] seperateNumber(String str) {
+        String regex = "//(.*?)\\n";
+        Matcher matcher = Pattern.compile(regex).matcher(str);
 
-        String seperate = ",|;";
+        String seperate = ",|;|\n";
         if (matcher.find()) {
             str = str.replaceAll(regex, "");
-            seperate = matcher.group();
+            seperate = matcher.group(1);
         }
 
-        return Arrays.asList(str.split(seperate)).stream().mapToInt(Integer::parseInt).toArray();
+        return convertStringAryToIntAry(str.split(seperate));
     }
 
-    private int plus(int[] intArray) {
-        int result = 0;
-        for(int i : intArray) {
-            result += i;
-        }
-        return result;
+    protected int[] convertStringAryToIntAry (String[] ary) {
+        return Arrays.asList(ary).stream().mapToInt(Integer::parseInt).toArray();
     }
 
-    @Test(expected=RuntimeException.class)
-    public void 유효성검사() {
-        String str = "//;\\n-1;-2;3";
-        validation(str);
-    }
-
-    @Test
-    public void 커스텀문자로숫자분리() {
-        String str = "//qq\\n1qq2qq3";
-        assertArrayEquals(seperateNumber(str), new int[]{1, 2, 3});
-    }
-
-    @Test
-    public void 더하기() {
-        int[] intArray = {1,2,3};
-        assertEquals(plus(intArray), 6);
+    protected void plus(int[] intArray) {
+        this.result = Arrays.stream(intArray).sum();
     }
 
 }
