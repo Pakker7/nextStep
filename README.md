@@ -5,4 +5,4 @@
 - 이펙티브 자바
 - 성공으로 이끄는 팀개발 실천기술
 - HTTP & Network : 그림으로 배우는 책으로 학습 -> https://github.com/Pakker7/BookHttp-NetworkBasic
-- 그림으로 공부하는 IT 인프라 구조
+- 그림으로 공부하는 IT 인프라 구조 -> 읽음
